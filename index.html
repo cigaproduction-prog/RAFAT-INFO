@@ -1,0 +1,55 @@
+فهمت المشكلة تماماً! التطبيق أو الموقع الذي تستخدمه الآن يقوم بـ "تشغيل" الكود بدلاً من عرضه لك كنص، لذلك ترى واجهة الموقع (الكلمات والأزرار) بدلاً من الأسطر البرمجية التي يجب أن تنسخها.
+
+لحل هذه المشكلة، سأكتب لك الكود الآن بطريقة تجبر التطبيق على عرضه كنص عادي.
+
+انسخ النص التالي بالكامل (من البداية للنهاية) وضعه في ملف index.html:
+
+نظام تسجيل العائلات
+
+## نظام تسجيل العائلات
+
+يرجى تسجيل الدخول للوصول إلى النموذج
+
+تسجيل الدخول باستخدام حساب جوجل
+
+أهلاً بك ، يمكنك الآن إدخال بيانات الأسرة:
+
+```
+<form id="familyForm">
+  <label>اسم العائلة / رب الأسرة:</label>
+  <input type="text" id="familyName" required>
+
+  <label>رقم التواصل:</label>
+  <input type="tel" id="contactInfo" required>
+
+  <label>أعمار أفراد الأسرة (مثال: 35, 30, 12, 8):</label>
+  <input type="text" id="familyAges" required>
+
+  <label>الحالة المادية للأسرة:</label>
+  <select id="financialStatus">
+    <option value="مستقرة">مستقرة</option>
+    <option value="دخل محدود">دخل محدود</option>
+    <option value="تحت خط الفقر">تحت خط الفقر</option>
+  </select>
+
+  <label>هل المعيل الأساسي للأسرة عاطل عن العمل؟</label>
+  <select id="breadwinnerStatus">
+    <option value="لا، يعمل">لا، يعمل</option>
+    <option value="نعم، عاطل عن العمل">نعم، عاطل عن العمل</option>
+  </select>
+
+  <label>هل يوجد أطفال من ذوي الإعاقة أو حالات مرضية مزمنة؟</label>
+  <select id="medicalCondition">
+    <option value="لا يوجد">لا يوجد</option>
+    <option value="نعم يوجد">نعم يوجد</option>
+  </select>
+
+  <div id="medicalDetailsBox" style="display:none;">
+    <label>يرجى توضيح الحالة المرضية أو الإعاقة:</label>
+    <textarea id="medicalDetails"></textarea>
+  </div>
+
+  <button type="submit" id="submitBtn">حفظ البيانات</button>
+</form>
+
+```
