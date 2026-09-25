@@ -3,534 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استبيان وحصر بيانات الأسر - بلدية رافات | محافظة القدس</title>
-    
+    <title>بلدية رافات - استبيان حصر الأسر والحالات الاجتماعية</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        rafat: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            500: '#14b8a6',
-                            600: '#0d9488', // Primary Turquoise
-                            700: '#0f766e', // Dark Teal
-                            800: '#115e59',
-                            900: '#134e4a',
-                        }
-                    },
-                    fontFamily: {
-                        cairo: ['Cairo', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <!-- Google Cairo Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #f8fafc;
-            color: #1e293b;
         }
-        
-        .input-icon-wrapper {
+        .input-icon-group {
             position: relative;
         }
-        
-        .input-icon-wrapper i {
+        .input-icon-group i {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             right: 1rem;
-            color: #0d9488;
-            transition: color 0.2s ease;
+            color: #64748b;
         }
-
-        .input-icon-wrapper input:focus ~ i,
-        .input-icon-wrapper select:focus ~ i,
-        .input-icon-wrapper textarea:focus ~ i {
-            color: #0f766e;
-        }
-        
-        .input-icon-wrapper input,
-        .input-icon-wrapper select,
-        .input-icon-wrapper textarea {
+        .input-icon-group input, .input-icon-group select, .input-icon-group textarea {
             padding-right: 2.75rem;
-        }
-
-        /* Glassmorphism subtle effects */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-
-        /* Custom animation for dynamic blocks */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 0.35s ease-out forwards;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 selection:bg-rafat-600 selection:text-white">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <!-- Header Bar -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Header / Navbar -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-teal-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-xl bg-rafat-600 text-white flex items-center justify-center text-2xl shadow-md shadow-rafat-600/30">
-                    <i class="fa-solid fa-building-columns"></i>
+                <div class="bg-teal-700 text-white p-2 rounded-xl shadow-md">
+                    <i class="fa-solid fa-building-columns text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-base md:text-lg text-slate-800 leading-tight">بلدية رافات</h1>
-                    <p class="text-xs font-semibold text-rafat-600">محافظة القدس - Palestine</p>
+                    <h1 class="font-extrabold text-lg text-slate-800">بلدية رافات - محافظة القدس</h1>
+                    <p class="text-xs text-teal-700 font-semibold">منصة حصر الأسر والبيانات الاجتماعية 2026</p>
                 </div>
             </div>
-            <div class="hidden sm:flex items-center gap-2 text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
-                <i class="fa-solid fa-clipboard-list text-rafat-600"></i>
-                <span>منظومة حصر وتسجيل أسر القرية</span>
-            </div>
+            <span class="bg-teal-50 text-teal-800 text-xs font-bold px-3 py-1.5 rounded-full border border-teal-200 hidden sm:inline-flex items-center gap-1">
+                <i class="fa-solid fa-shield-halved text-teal-600"></i> استبيان رسمي معتمد
+            </span>
         </div>
     </header>
 
-    <!-- Hero Cover Banner -->
-    <section class="max-w-5xl mx-auto px-4 mt-4 w-full">
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 bg-slate-900 group">
-            <!-- Cover Image -->
-            <img src="غلاف بلدية رافات  .jpg" alt="غلاف بلدية رافات - محافظة القدس" class="w-full h-52 sm:h-72 md:h-80 object-cover object-center opacity-90 group-hover:scale-105 transition duration-700">
-            
-            <!-- Dark Teal Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-rafat-900/90 via-slate-900/40 to-transparent flex flex-col justify-end p-5 sm:p-8">
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="bg-rafat-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-rafat-500">
-                        <i class="fa-solid fa-bullhorn ml-1"></i> استبيان رسمي 2026
-                    </span>
-                    <span class="bg-white/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/30 hidden sm:inline-block">
-                        محافظة القدس الشريف
-                    </span>
-                </div>
-                <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-white mb-2 leading-tight">
-                    استبيان وتحديث بيانات الأسر في قرية رافات
-                </h2>
-                <p class="text-slate-200 text-xs sm:text-sm max-w-2xl font-light leading-relaxed">
-                    حرصاً من بلدية رافات على تقديم أفضل الخدمات وتطوير البنية التحتية وتأمين المساعدات الاجتماعية المستحقة، يرجى تعبئة كافة البيانات المطلوبة بدقة عالية.
-                </p>
+    <!-- Banner Image Section -->
+    <section class="max-w-6xl mx-auto px-4 mt-6">
+        <div class="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900">
+            <img src="غلاف بلدية رافات  .jpg" alt="شعار وغلاف بلدية رافات" class="w-full h-52 sm:h-72 md:h-80 object-cover opacity-90">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/30 to-transparent flex flex-col justify-end p-6 sm:p-8">
+                <span class="bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-md w-max mb-2 shadow-sm">
+                    <i class="fa-solid fa-map-pin ml-1"></i> محافظة القدس - بلدة رافات
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-1 leading-tight">استمارة المسح الاجتماعي الشامل</h2>
+                <p class="text-slate-200 text-xs sm:text-sm max-w-2xl">يرجى تعبئة كافة البيانات بدقة لمساعدة البلدية في تحديث قاعدة بيانات الأسر وتوجيه خدمات الدعم والخدمات الاجتماعية للمستحقين.</p>
             </div>
         </div>
     </section>
 
-    <!-- Main Form Container -->
-    <main class="max-w-5xl mx-auto px-4 py-8 w-full flex-grow">
-        
-        <form id="rafatSurveyForm" class="space-y-8">
+    <!-- Form Container -->
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow">
+        <form id="familyForm" class="space-y-8">
 
-            <!-- ================= SECTION 1 ================= -->
-            <div class="glass-card rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/90 transition hover:shadow-md">
-                
+            <!-- Section 1: Head of Family & Contact -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition">
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                    <div class="w-10 h-10 rounded-xl bg-rafat-100 text-rafat-700 flex items-center justify-center font-bold text-lg">
-                        1
-                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center text-lg font-bold">1</div>
                     <div>
-                        <h3 class="text-lg font-bold text-slate-800">بيانات رب الأسرة والمعلومات التعريفية</h3>
-                        <p class="text-xs text-slate-500">البيانات الشخصية لرب الأسرة وعنوان الإقامة الحالي</p>
+                        <h3 class="text-lg font-bold text-slate-800">بيانات رب الأسرة والاتصال</h3>
+                        <p class="text-xs text-slate-500">المعلومات الأساسية لرب الأسرة وعنوان السكن في البلدة</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    
-                    <!-- Head Full Name -->
+                    <!-- Head Name -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            الاسم الرباعي لرب الأسرة <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <input type="text" name="اسم_رب_الأسرة" required placeholder="مثال: أحمد محمد علي حسن" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white">
+                        <label class="block text-sm font-semibold mb-2 text-slate-700">اسم رب الأسرة الرباعي <span class="text-red-500">*</span></label>
+                        <div class="input-icon-group">
                             <i class="fa-solid fa-user"></i>
+                            <input type="text" name="head_name" required placeholder="الاسم كامل كما في الهوية" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm">
                         </div>
                     </div>
 
-                    <!-- National ID -->
+                    <!-- Phone Number -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            رقم الهوية الوطنية <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <input type="text" name="رقم_الهوية" required pattern="[0-9]{9}" maxlength="9" placeholder="9 أرقام بدون فواصل" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white">
-                            <i class="fa-solid fa-id-card"></i>
-                        </div>
-                    </div>
-
-                    <!-- Phone / WhatsApp -->
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            رقم الهاتف / الواتساب للتواصل <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <input type="tel" name="رقم_الهاتف" required placeholder="05XXXXXXXX" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white text-right" dir="ltr">
+                        <label class="block text-sm font-semibold mb-2 text-slate-700">رقم الهاتف للتواصل <span class="text-red-500">*</span></label>
+                        <div class="input-icon-group">
                             <i class="fa-solid fa-phone"></i>
+                            <input type="tel" name="phone" required placeholder="05XXXXXXXX" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm text-right" dir="ltr">
                         </div>
                     </div>
 
-                    <!-- Date of Birth -->
+                    <!-- Head Date of Birth -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            تاريخ ميلاد رب الأسرة <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <input type="date" name="تاريخ_ميلاد_رب_الأسرة" required class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white">
+                        <label class="block text-sm font-semibold mb-2 text-slate-700">تاريخ ميلاد رب الأسرة <span class="text-red-500">*</span></label>
+                        <div class="input-icon-group">
                             <i class="fa-solid fa-calendar-days"></i>
+                            <input type="date" name="head_dob" required class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm">
                         </div>
                     </div>
 
-                    <!-- Total Family Members Count -->
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            عدد أفراد الأسرة الإجمالي (شاملاً رب الأسرة والزوجة والأبناء) <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <input type="number" name="عدد_أفراد_الأسرة" id="familyCountInput" min="1" max="30" required placeholder="أدخل العدد الإجمالي" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white">
+                    <!-- Family Members Count -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-700">عدد أفراد الأسرة الإجمالي <span class="text-red-500">*</span></label>
+                        <div class="input-icon-group">
                             <i class="fa-solid fa-users"></i>
+                            <input type="number" name="family_count" min="1" max="30" required placeholder="يشمل الزوج/الزوجة والأبناء" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm">
                         </div>
                     </div>
 
-                    <!-- Detailed Address in Rafat -->
+                    <!-- Address -->
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            العنوان التفصيلي في قرية رافات <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <input type="text" name="العنوان_التفصيلي" required placeholder="الحي / اسم الشارع / بالقرب من معلم معروف (مثل: قرب المدرسة / المسجد الكبير)" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white">
-                            <i class="fa-solid fa-map-location-dot"></i>
+                        <label class="block text-sm font-semibold mb-2 text-slate-700">العنوان التفصيلي <span class="text-red-500">*</span></label>
+                        <div class="input-icon-group">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <input type="text" name="address" required placeholder="الحي / الشارع / القرب من معلمين أو معالم معروفة" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm">
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- ================= SECTION 2 ================= -->
-            <div class="glass-card rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/90 transition hover:shadow-md">
-                
+            <!-- Section 2: Financial & Employment -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition">
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
-                        2
-                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg font-bold">2</div>
                     <div>
-                        <h3 class="text-lg font-bold text-slate-800">الوضع الاقتصادي ومصدر الدخل</h3>
-                        <p class="text-xs text-slate-500">حالة عمل رب الأسرة والمصدر الرئيسي لدخل العائلة</p>
+                        <h3 class="text-lg font-bold text-slate-800">الحالة الاقتصادية والعمل</h3>
+                        <p class="text-xs text-slate-500">حالة عمل رب الأسرة ومصدر الدخل الرئيسي</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    
                     <!-- Head Employment Status -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            حالة عمل رب الأسرة <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <select name="حالة_عمل_رب_الأسرة" required class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white">
+                        <label class="block text-sm font-semibold mb-2 text-slate-700">حالة عمل رب الأسرة <span class="text-red-500">*</span></label>
+                        <div class="input-icon-group">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <select name="employment_status" required class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm bg-white">
                                 <option value="" disabled selected>اختر الحالة الوظيفية</option>
                                 <option value="عاطل عن العمل (يبحث عن عمل)">عاطل عن العمل (يبحث عن عمل)</option>
-                                <option value="عاطل عن العمل (غير قادر صحياً)">عاطل عن العمل (غير قادر صحياً)</option>
-                                <option value="موظف حكومي">موظف قطاع حكومي</option>
+                                <option value="عاطل عن العمل (سبب صحي أو إعاقة)">عاطل عن العمل (سبب صحي/إعاقة)</option>
+                                <option value="موظف قطاع حكومي">موظف قطاع حكومي</option>
                                 <option value="موظف قطاع خاص">موظف قطاع خاص</option>
-                                <option value="عامل مياومة / عمل حر غير ثابت">عامل مياومة / عمل حر غير ثابت</option>
+                                <option value="عامل بغير انتظام / مياومة">عامل بغير انتظام / مياومة</option>
+                                <option value="عمل حر / تجارة صغرى">عمل حر / تجارة صغرى</option>
                                 <option value="متقاعد">متقاعد</option>
                                 <option value="أخرى">أخرى</option>
                             </select>
-                            <i class="fa-solid fa-briefcase"></i>
                         </div>
                     </div>
 
                     <!-- Income Source -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-1.5">
-                            مصدر دخل الأسرة الرئيسي <span class="text-red-500">*</span>
-                        </label>
-                        <div class="input-icon-wrapper">
-                            <select name="مصدر_دخل_الأسرة" required class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white">
-                                <option value="" disabled selected>اختر مصدر الدخل الرئيسي</option>
+                        <label class="block text-sm font-semibold mb-2 text-slate-700">مصدر دخل الأسرة الرئيسي <span class="text-red-500">*</span></label>
+                        <div class="input-icon-group">
+                            <i class="fa-solid fa-wallet"></i>
+                            <select name="income_source" required class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm bg-white">
+                                <option value="" disabled selected>اختر مصدر الدخل</option>
                                 <option value="راتب شهري ثابت">راتب شهري ثابت</option>
-                                <option value="عمل يومي / مياومة">عمل يومي / مياومة</option>
-                                <option value="مساعدات وإغاثة">مساعدات وتبرعات إغاثية</option>
-                                <option value="دعم من أقارب/مغتربين">دعم ومساعدة من أقارب / مغتربين</option>
-                                <option value="مشروع خاص">مشروع تجاري خاص أو زراعة</option>
-                                <option value="لا يوجد دخل ثابت">لا يوجد أي دخل ثابت</option>
+                                <option value="أجر يومي غير ثابت">أجر يومي / غير ثابت</option>
+                                <option value="مساعدات إغاثية / شؤون اجتماعية">مساعدات إغاثية / شؤون اجتماعية</option>
+                                <option value="مساعدة من أقارب أو مغتربين">مساعدة من أقارب أو مغتربين</option>
+                                <option value="دعم من مخصصات تقاعدية">مخصصات تقاعدية</option>
+                                <option value="لا يوجد دخل ثابت">لا يوجد دخل ثابت</option>
                             </select>
-                            <i class="fa-solid fa-coins"></i>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- ================= SECTION 3 ================= -->
-            <div class="glass-card rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/90 transition hover:shadow-md">
-                
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+            <!-- Section 3: Family Members & Chronic Diseases -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 flex-wrap gap-3">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-lg">
-                            3
-                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-lg font-bold">3</div>
                         <div>
-                            <h3 class="text-lg font-bold text-slate-800">بيانات أفراد الأسرة والحالة الصحية</h3>
-                            <p class="text-xs text-slate-500">سجل أسماء أفراد الأسرة وتواريخ ميلادهم والحالات الصحية أو الإعاقات</p>
+                            <h3 class="text-lg font-bold text-slate-800">بيانات أفراد الأسرة والأوضاع الصحية</h3>
+                            <p class="text-xs text-slate-500">تاريخ ميلاد كل فرد وهل يعاني من مرض مزمن أو إعاقة</p>
                         </div>
                     </div>
-
-                    <button type="button" id="addMemberBtn" class="inline-flex items-center justify-center gap-2 bg-rafat-50 hover:bg-rafat-100 text-rafat-700 border border-rafat-200 font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm active:scale-95">
-                        <i class="fa-solid fa-user-plus text-sm"></i> إضافة فرد جديد للأسرة
+                    <button type="button" id="addMemberBtn" class="bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 border border-teal-200 transition">
+                        <i class="fa-solid fa-plus"></i> إضافة فرد آخر للأسرة
                     </button>
                 </div>
 
-                <!-- Container for Dynamic Member Cards -->
+                <!-- Dynamic Members Container -->
                 <div id="membersContainer" class="space-y-4">
-                    <!-- Dynamic Member Rows Inserted via JS -->
+                    <!-- JavaScript adds member rows here -->
                 </div>
             </div>
 
-            <!-- ================= SECTION 4 ================= -->
-            <div class="glass-card rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/90">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
-                        4
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-slate-800">ملاحظات أو احتياجات طارئة خاصة بالأسرة</h3>
-                        <p class="text-xs text-slate-500">اذكر أي احتياجات خاصة بالترميم، الدواء، المستلزمات الطبية، أو الدعم</p>
-                    </div>
-                </div>
-
-                <div class="input-icon-wrapper">
-                    <textarea name="ملاحظات_واحتياجات_خاصة" rows="3" placeholder="أدخل هنا أي تفاصيل أو ملاحظات مهمة ترغب بإيصالها إلى بلدية رافات..." class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-rafat-600 focus:border-rafat-600 outline-none transition bg-white"></textarea>
-                    <i class="fa-solid fa-pen-to-square top-5"></i>
+            <!-- Additional Notes -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80">
+                <label class="block text-sm font-semibold mb-2 text-slate-700">ملاحظات أو احتياجات خاصة بالأسرة (اختياري)</label>
+                <div class="input-icon-group">
+                    <i class="fa-solid fa-comment-dots top-6"></i>
+                    <textarea name="notes" rows="3" placeholder="أدخل أي معلومات إضافية ترى أنه من المهم لبلدية رافات الاطلاع عليها..." class="w-full rounded-xl border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-600 focus:border-teal-600 outline-none transition text-sm"></textarea>
                 </div>
             </div>
 
-            <!-- Submit Button Section -->
-            <div class="text-center pt-4">
-                <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-gradient-to-r from-rafat-600 to-rafat-800 hover:from-rafat-700 hover:to-rafat-900 text-white font-extrabold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl hover:shadow-rafat-600/30 transition duration-300 transform active:scale-95 inline-flex items-center justify-center gap-3 text-base">
-                    <i class="fa-solid fa-paper-plane"></i>
-                    <span>إرسال البيانات لبلدية رافات</span>
+            <!-- Submit Button & Messages -->
+            <div class="text-center pt-2">
+                <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-gradient-to-r from-teal-700 to-emerald-700 hover:from-teal-800 hover:to-emerald-800 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition transform active:scale-95 flex items-center justify-center gap-3 text-base mx-auto">
+                    <i class="fa-solid fa-paper-plane"></i> إرسال البيانات إلى بلدية رافات
                 </button>
-
-                <!-- Status Feedback Message -->
-                <div id="statusAlert" class="hidden mt-6 p-4 rounded-xl text-sm font-bold transition duration-300"></div>
+                <div id="statusMessage" class="hidden mt-4 p-4 rounded-xl text-sm font-semibold"></div>
             </div>
 
         </form>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-12 border-t border-slate-800">
-        <div class="max-w-5xl mx-auto px-4 text-center space-y-3">
-            <div class="flex justify-center items-center gap-2 text-slate-300 font-bold">
-                <i class="fa-solid fa-landmark text-rafat-500"></i>
-                <span>بلدية رافات - محافظة القدس</span>
-            </div>
-            <p class="text-slate-500">جميع البيانات المسجلة تُعامل بسرية تامة وتُستخدم لأغراض التخطيط والخدمات الدعمية بالبلدية فقط.</p>
-            <p class="text-slate-600 text-[11px]">حقوق النشر © 2026 بلدية رافات | فلسطين</p>
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 mt-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
+            <p>جميع الحقوق محفوظة © 2026 - بلدية رافات - محافظة القدس</p>
+            <p class="text-slate-500">تم تطوير نظام الاستبيان للتكامل المباشر مع قواعد بيانات Formspree</p>
         </div>
     </footer>
 
     <!-- JavaScript Logic -->
     <script>
+        // Formspree API Endpoint
         const FORMSPREE_ENDPOINT = "https://formspree.io/f/myezpbzb";
-        let memberCount = 0;
 
-        function createMemberCard(isInitial = false) {
-            memberCount++;
+        let memberIndex = 0;
+
+        // Function to dynamically add a member row
+        function addMemberBlock(isFirst = false) {
+            memberIndex++;
             const container = document.getElementById('membersContainer');
+            
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'member-card bg-slate-50 p-5 rounded-2xl border border-slate-200 relative transition hover:border-teal-200';
+            memberDiv.id = `member_card_${memberIndex}`;
 
-            const card = document.createElement('div');
-            card.className = 'member-card animate-fade-in bg-slate-50/80 p-5 rounded-xl border border-slate-200 relative space-y-4';
-            card.id = `member_card_${memberCount}`;
-
-            card.innerHTML = `
-                <div class="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
-                    <span class="text-xs font-extrabold text-rafat-800 bg-rafat-100 px-3 py-1 rounded-md flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-tag text-rafat-600"></i>
-                        فرد الأسرة رقم ${memberCount}
+            memberDiv.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold bg-teal-100 text-teal-800 px-3 py-1 rounded-full">
+                        فرد الأسرة رقم ${memberIndex}
                     </span>
-                    ${!isInitial ? `
-                    <button type="button" onclick="removeMemberCard(${memberCount})" class="text-red-500 hover:text-red-700 text-xs font-bold inline-flex items-center gap-1 transition">
+                    ${!isFirst ? `
+                    <button type="button" onclick="removeMember(${memberIndex})" class="text-rose-600 hover:text-rose-800 text-xs font-bold flex items-center gap-1 transition">
                         <i class="fa-solid fa-trash-can"></i> حذف
-                    </button>
-                    ` : ''}
+                    </button>` : ''}
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <!-- Member Name -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">الاسم الكامل <span class="text-red-500">*</span></label>
-                        <input type="text" name="اسم_الفرد_${memberCount}" required placeholder="اسم التابع" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-rafat-600 outline-none bg-white">
+                        <label class="block text-xs font-semibold mb-1 text-slate-600">اسم الفرد الكامل</label>
+                        <input type="text" class="member-name w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-teal-600 outline-none bg-white" required placeholder="الاسم ثلاثي أو رباعي">
                     </div>
 
-                    <!-- Member DOB -->
+                    <!-- Member Birth Date -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">تاريخ الميلاد <span class="text-red-500">*</span></label>
-                        <input type="date" name="تاريخ_ميلاد_الفرد_${memberCount}" required class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-rafat-600 outline-none bg-white">
+                        <label class="block text-xs font-semibold mb-1 text-slate-600">تاريخ الميلاد</label>
+                        <input type="date" class="member-dob w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-teal-600 outline-none bg-white" required>
                     </div>
 
-                    <!-- Health Status -->
+                    <!-- Health Condition -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">الحالة الصحية / الإعاقة <span class="text-red-500">*</span></label>
-                        <select name="حالة_صحة_الفرد_${memberCount}" onchange="handleHealthConditionChange(${memberCount}, this.value)" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-rafat-600 outline-none bg-white">
-                            <option value="سليم">سليم / لا يوجد مرض مزمن</option>
-                            <option value="مرض مزمن">يعاني من مرض مزمن</option>
-                            <option value="إعاقة جسدية/حركية">إعاقة جسدية / حركية</option>
-                            <option value="إعاقة ذهنية">إعاقة ذهنية / عقلية</option>
-                            <option value="إعاقة حواس">إعاقة حواس (بصرية/سمعية)</option>
-                            <option value="أخرى">حالة صحية أخرى</option>
+                        <label class="block text-xs font-semibold mb-1 text-slate-600">الحالة الصحية (مرض / إعاقة)</label>
+                        <select onchange="toggleConditionDetail(${memberIndex}, this.value)" class="member-health w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-teal-600 outline-none bg-white">
+                            <option value="سليم / لا يوجد">سليم / لا يوجد مرض مزمن</option>
+                            <option value="مرض مزمن">مرض مزمن (سكري، ضغط، غيرها)</option>
+                            <option value="إعاقة حركية">إعاقة حركية</option>
+                            <option value="إعاقة ذهنية">إعاقة ذهنية</option>
+                            <option value="إعاقة حواس (بصرية/سمعية)">إعاقة بصرية أو سمعية</option>
+                            <option value="حالة صحية أخرى">حالة صحية خاصة أخرى</option>
                         </select>
                     </div>
 
-                    <!-- Conditional Health Condition Details Input -->
-                    <div id="health_details_container_${memberCount}" class="hidden md:col-span-3 bg-amber-50/80 p-3.5 rounded-lg border border-amber-200">
-                        <label class="block text-xs font-bold text-amber-900 mb-1">
-                            <i class="fa-solid fa-notes-medical ml-1 text-amber-600"></i> تفاصيل المرض أو الإعاقة ونوع العلاج أو الاحتياج اللازم:
-                        </label>
-                        <input type="text" id="health_detail_input_${memberCount}" name="تفاصيل_مرض_أو_إعاقة_الفرد_${memberCount}" placeholder="مثال: ضغط/سكري ويدخل المستشفى شهرياً أو يحتاج كرسياً متحركاً..." class="w-full rounded-lg border border-amber-300 px-3 py-2 text-sm focus:ring-2 focus:ring-amber-500 outline-none bg-white">
+                    <!-- Health Detail Input (Hidden by default) -->
+                    <div id="health_detail_wrapper_${memberIndex}" class="hidden md:col-span-3">
+                        <label class="block text-xs font-semibold mb-1 text-rose-700">توضيح نوع المرض المزمن أو الإعاقة والمستلزمات الطبية المطلوبة</label>
+                        <input type="text" class="member-detail w-full rounded-lg border border-rose-300 px-3 py-2 text-sm focus:ring-2 focus:ring-rose-500 outline-none bg-white" placeholder="أذكر نوع المرض أو الإعاقة والعلاج الدوري المستخدم...">
                     </div>
                 </div>
             `;
 
-            container.appendChild(card);
+            container.appendChild(memberDiv);
         }
 
-        function removeMemberCard(id) {
+        // Function to remove a member row
+        function removeMember(id) {
             const card = document.getElementById(`member_card_${id}`);
             if (card) {
                 card.remove();
             }
         }
 
-        function handleHealthConditionChange(id, selectedValue) {
-            const detailContainer = document.getElementById(`health_details_container_${id}`);
-            const detailInput = document.getElementById(`health_detail_input_${id}`);
-
-            if (selectedValue !== 'سليم') {
-                detailContainer.classList.remove('hidden');
-                detailInput.setAttribute('required', 'required');
+        // Toggle medical details input based on dropdown choice
+        function toggleConditionDetail(id, value) {
+            const detailWrapper = document.getElementById(`health_detail_wrapper_${id}`);
+            if (value !== 'سليم / لا يوجد') {
+                detailWrapper.classList.remove('hidden');
             } else {
-                detailContainer.classList.add('hidden');
-                detailInput.removeAttribute('required');
-                detailInput.value = '';
+                detailWrapper.classList.add('hidden');
             }
         }
 
-        // Initialize form with 1 default family member card
-        createMemberCard(true);
+        // Initialize form with 1 default member
+        addMemberBlock(true);
 
-        // Add Member Button Click Listener
-        document.getElementById('addMemberBtn').addEventListener('click', () => {
-            createMemberCard(false);
-        });
+        // Add member button event
+        document.getElementById('addMemberBtn').addEventListener('click', () => addMemberBlock());
 
-        document.getElementById('rafatSurveyForm').addEventListener('submit', async function(e) {
+        // Handle Form Submission to Formspree
+        document.getElementById('familyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
+            
             const submitBtn = document.getElementById('submitBtn');
-            const statusAlert = document.getElementById('statusAlert');
-            const rawFormData = new FormData(this);
+            const statusMessage = document.getElementById('statusMessage');
 
-            // Structure a tidy JSON payload to send to Formspree
-            const compiledData = {
-                "جهة_الاستبيان": "بلدية رافات - محافظة القدس",
-                "تاريخ_التسجيل": new Date().toLocaleString('ar-EG'),
-                "اسم_رب_الأسرة": rawFormData.get('اسم_رب_الأسرة'),
-                "رقم_الهوية": rawFormData.get('رقم_الهوية'),
-                "رقم_الهاتف": rawFormData.get('رقم_الهاتف'),
-                "تاريخ_ميلاد_رب_الأسرة": rawFormData.get('تاريخ_ميلاد_رب_الأسرة'),
-                "عدد_أفراد_الأسرة": rawFormData.get('عدد_أفراد_الأسرة'),
-                "العنوان_التفصيلي": rawFormData.get('العنوان_التفصيلي'),
-                "حالة_عمل_رب_الأسرة": rawFormData.get('حالة_عمل_رب_الأسرة'),
-                "مصدر_دخل_الأسرة": rawFormData.get('مصدر_دخل_الأسرة'),
-                "ملاحظات_واحتياجات_خاصة": rawFormData.get('ملاحظات_واحتياجات_خاصة') || 'لا يوجد',
-                "قائمة_أفراد_الأسرة": []
-            };
+            // Construct FormData object specifically formatted for Formspree
+            const sendData = new FormData();
 
-            // Loop and compile all added dynamic family members
-            for (let i = 1; i <= memberCount; i++) {
-                if (document.getElementById(`member_card_${i}`)) {
-                    compiledData["قائمة_أفراد_الأسرة"].push({
-                        "رقم_الفرد": i,
-                        "الاسم": rawFormData.get(`اسم_الفرد_${i}`),
-                        "تاريخ_الميلاد": rawFormData.get(`تاريخ_ميلاد_الفرد_${i}`),
-                        "الحالة_الصحية": rawFormData.get(`حالة_صحة_الفرد_${i}`),
-                        "التفاصيل_الصحية": rawFormData.get(`تفاصيل_مرض_أو_إعاقة_الفرد_${i}`) || 'لا يوجد'
-                    });
-                }
+            // 1. Basic Family Info
+            sendData.append('اسم_رب_الأسرة', document.querySelector('[name="head_name"]').value);
+            sendData.append('رقم_الهاتف', document.querySelector('[name="phone"]').value);
+            sendData.append('تاريخ_ميلاد_رب_الأسرة', document.querySelector('[name="head_dob"]').value);
+            sendData.append('عدد_أفراد_الأسرة', document.querySelector('[name="family_count"]').value);
+            sendData.append('العنوان_التفصيلي', document.querySelector('[name="address"]').value);
+            sendData.append('حالة_عمل_رب_الأسرة', document.querySelector('[name="employment_status"]').value);
+            sendData.append('مصدر_الدخل_الرئيسي', document.querySelector('[name="income_source"]').value);
+            
+            const notes = document.querySelector('[name="notes"]').value;
+            if (notes) {
+                sendData.append('ملاحظات_إضافية', notes);
             }
 
-            // Update UI State during submission
+            // 2. Loop over dynamic family members and format them nicely
+            const memberCards = document.querySelectorAll('.member-card');
+            memberCards.forEach((card, index) => {
+                const num = index + 1;
+                const name = card.querySelector('.member-name')?.value || 'غير محدد';
+                const dob = card.querySelector('.member-dob')?.value || 'غير محدد';
+                const health = card.querySelector('.member-health')?.value || 'سليم';
+                const detail = card.querySelector('.member-detail')?.value || '';
+
+                let info = `الاسم: ${name} | تاريخ الميلاد: ${dob} | الحالة الصحية: ${health}`;
+                if (detail && health !== 'سليم / لا يوجد') {
+                    info += ` (التفاصيل: ${detail})`;
+                }
+
+                sendData.append(`فرد_الأسرة_${num}`, info);
+            });
+
+            // UI Loading State
             submitBtn.disabled = true;
-            submitBtn.classList.add('opacity-75');
-            submitBtn.innerHTML = `
-                <i class="fa-solid fa-spinner fa-spin"></i>
-                <span>جاري إرسال البيانات لبلدية رافات...</span>
-            `;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال لـ Formspree...';
+            statusMessage.className = 'hidden';
 
             try {
-                // Send JSON directly to Formspree via AJAX Fetch
+                // Send Request to Formspree with Accept header
                 const response = await fetch(FORMSPREE_ENDPOINT, {
                     method: 'POST',
+                    body: sendData,
                     headers: {
-                        'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(compiledData)
+                    }
                 });
 
                 if (response.ok) {
-                    statusAlert.className = "mt-6 p-5 rounded-2xl text-sm font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-sm animate-fade-in flex items-center justify-center gap-3";
-                    statusAlert.innerHTML = `
-                        <i class="fa-solid fa-circle-check text-2xl text-emerald-600"></i>
-                        <div>
-                            <p class="text-base font-extrabold">تم استلام وتحديث بيانات الأسرة بنجاح!</p>
-                            <p class="text-xs font-normal text-emerald-700">شكراً لتعاونكم مع بلدية رافات - محافظة القدس.</p>
-                        </div>
-                    `;
+                    statusMessage.className = 'block mt-4 p-4 rounded-xl text-sm font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+                    statusMessage.innerHTML = '<i class="fa-solid fa-circle-check ml-1"></i> تم إرسال وحفظ بيانات الأسرة بنجاح إلى بلدية رافات!';
+                    
+                    // Reset Form
                     this.reset();
                     document.getElementById('membersContainer').innerHTML = '';
-                    memberCount = 0;
-                    createMemberCard(true); // Re-initialize 1 fresh member input card
+                    memberIndex = 0;
+                    addMemberBlock(true);
                 } else {
-                    throw new Error("حدث خطأ أثناء معالجة الطلب في السيرفر");
+                    const resJson = await response.json();
+                    throw new Error(resJson.error || 'فشل في الإرسال، يرجى التأكد من تفعيل النموذج في Formspree.');
                 }
-            } catch (error) {
-                statusAlert.className = "mt-6 p-5 rounded-2xl text-sm font-bold bg-rose-50 text-rose-800 border border-rose-200 shadow-sm animate-fade-in flex items-center justify-center gap-3";
-                statusAlert.innerHTML = `
-                    <i class="fa-solid fa-circle-exclamation text-2xl text-rose-600"></i>
-                    <div>
-                        <p class="text-base font-extrabold">عذراً، تعذر إرسال البيانات حالياً</p>
-                        <p class="text-xs font-normal text-rose-700">يرجى التأكد من اتصال الإنترنت ثم المحاولة مرة أخرى.</p>
-                    </div>
-                `;
+            } catch (err) {
+                statusMessage.className = 'block mt-4 p-4 rounded-xl text-sm font-bold bg-rose-100 text-rose-800 border border-rose-300';
+                statusMessage.innerHTML = `<i class="fa-solid fa-triangle-exclamation ml-1"></i> تعذر الإرسال: ${err.message}`;
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-75');
-                submitBtn.innerHTML = `
-                    <i class="fa-solid fa-paper-plane"></i>
-                    <span>إرسال البيانات لبلدية رافات</span>
-                `;
-                statusAlert.classList.remove('hidden');
-                statusAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> إرسال البيانات إلى بلدية رافات';
             }
         });
     </script>
