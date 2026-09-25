@@ -1,37 +1,72 @@
+[!DOCTYPE html]
+[html lang="ar" dir="rtl"]
+[head]
+  [meta charset="UTF-8"]
+  [meta name="viewport" content="width=device-width, initial-scale=1.0"]
+  [title]نظام تسجيل العائلات[/title]
+  [style]
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f7f6; }
+    .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; width: 100%; font-size: 16px; }
+  [/style]
+[/head]
+[body]
 
-<form id="familyForm">
-  <label>اسم العائلة / رب الأسرة:</label>
-  <input type="text" id="familyName" required>
+[div class="container"]
+  [h2 style="text-align: center;"]نظام تسجيل العائلات[/h2]
+  
+  [!-- تم ربط النموذج برابط Formspree الخاص بك --]
+  [form action="https://formspree.io/f/myezpbzb" method="POST"]
+    
+    [label]اسم العائلة / رب الأسرة:[/label]
+    [input type="text" name="اسم_العائلة" required]
 
-  <label>رقم التواصل:</label>
-  <input type="tel" id="contactInfo" required>
+    [label]رقم التواصل:[/label]
+    [input type="tel" name="رقم_التواصل" required]
 
-  <label>أعمار أفراد الأسرة (مثال: 35, 30, 12, 8):</label>
-  <input type="text" id="familyAges" required>
+    [label]أعمار أفراد الأسرة (مثال: 35, 30, 12, 8):[/label]
+    [input type="text" name="أعمار_أفراد_الأسرة" required]
 
-  <label>الحالة المادية للأسرة:</label>
-  <select id="financialStatus">
-    <option value="مستقرة">مستقرة</option>
-    <option value="دخل محدود">دخل محدود</option>
-    <option value="تحت خط الفقر">تحت خط الفقر</option>
-  </select>
+    [label]الحالة المادية للأسرة:[/label]
+    [select name="الحالة_المادية"]
+      [option value="مستقرة"]مستقرة[/option]
+      [option value="دخل محدود"]دخل محدود[/option]
+      [option value="تحت خط الفقر"]تحت خط الفقر[/option]
+    [/select]
 
-  <label>هل المعيل الأساسي للأسرة عاطل عن العمل؟</label>
-  <select id="breadwinnerStatus">
-    <option value="لا، يعمل">لا، يعمل</option>
-    <option value="نعم، عاطل عن العمل">نعم، عاطل عن العمل</option>
-  </select>
+    [label]هل المعيل الأساسي للأسرة عاطل عن العمل؟[/label]
+    [select name="حالة_المعيل"]
+      [option value="لا، يعمل"]لا، يعمل[/option]
+      [option value="نعم، عاطل عن العمل"]نعم، عاطل عن العمل[/option]
+    [/select]
 
-  <label>هل يوجد أطفال من ذوي الإعاقة أو حالات مرضية مزمنة؟</label>
-  <select id="medicalCondition">
-    <option value="لا يوجد">لا يوجد</option>
-    <option value="نعم يوجد">نعم يوجد</option>
-  </select>
+    [label]هل يوجد أطفال من ذوي الإعاقة أو حالات مرضية مزمنة؟[/label]
+    [select name="الحالة_الصحية" id="medicalCondition"]
+      [option value="لا يوجد"]لا يوجد[/option]
+      [option value="نعم يوجد"]نعم يوجد[/option]
+    [/select]
 
-  <div id="medicalDetailsBox" style="display:none;">
-    <label>يرجى توضيح الحالة المرضية أو الإعاقة:</label>
-    <textarea id="medicalDetails"></textarea>
-  </div>
+    [div id="medicalDetailsBox" style="display:none;"]
+      [label]يرجى توضيح الحالة المرضية أو الإعاقة:[/label]
+      [textarea name="تفاصيل_المرض_أو_الإعاقة"][/textarea]
+    [/div]
 
-  <button type="submit" id="submitBtn">حفظ البيانات</button>
-</form>
+    [button type="submit"]إرسال البيانات[/button]
+  [/form]
+[/div]
+
+[script]
+  document.getElementById('medicalCondition').addEventListener('change', function() {
+    const detailsBox = document.getElementById('medicalDetailsBox');
+    if (this.value === 'نعم يوجد') {
+      detailsBox.style.display = 'block';
+    } else {
+      detailsBox.style.display = 'none';
+    }
+  });
+[/script]
+
+[/body]
+[/html]
